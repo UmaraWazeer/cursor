@@ -1,0 +1,893 @@
+[
+  {
+    "group_num": 1,
+    "squads": [
+      1
+    ],
+    "members": [
+      {
+        "name": "Arthur Mellor",
+        "role": "Product Manager",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      },
+      {
+        "name": "Michael Leigh",
+        "role": "Product Designer",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      },
+      {
+        "name": "Gayatri Sharma",
+        "role": "Iteration Manager",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      },
+      {
+        "name": "Simran Gill",
+        "role": "Business Analyst",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      },
+      {
+        "name": "Nicholas Kolotsos",
+        "role": "Engineer",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      },
+      {
+        "name": "Zeeshan Mujtaba",
+        "role": "Engineer (C)",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 2,
+    "squads": [
+      2
+    ],
+    "members": [
+      {
+        "name": "Alex Krstev (C)",
+        "role": "Product Manager",
+        "squad": 2,
+        "squad_name": "Browse & Search Experience"
+      },
+      {
+        "name": "Queenie Lo",
+        "role": "Product Designer",
+        "squad": 2,
+        "squad_name": "Browse & Search Experience"
+      },
+      {
+        "name": "Emre Rothzberg",
+        "role": "Lead Engineer",
+        "squad": 2,
+        "squad_name": "Browse & Search Experience"
+      },
+      {
+        "name": "Kawal Bhatti",
+        "role": "Engineer",
+        "squad": 2,
+        "squad_name": "Browse & Search Experience"
+      },
+      {
+        "name": "Jamie Nixon",
+        "role": "Engineer",
+        "squad": 2,
+        "squad_name": "Browse & Search Experience"
+      },
+      {
+        "name": "Monalisa Mohanty",
+        "role": "QA Engineer",
+        "squad": 2,
+        "squad_name": "Browse & Search Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 3,
+    "squads": [
+      3
+    ],
+    "members": [
+      {
+        "name": "Chetan Pundir",
+        "role": "Engineer",
+        "squad": 3,
+        "squad_name": "Decisioning & Perso"
+      },
+      {
+        "name": "Vim Herath",
+        "role": "Engineer",
+        "squad": 3,
+        "squad_name": "Decisioning & Perso"
+      },
+      {
+        "name": "Rahul Ronald",
+        "role": "QA Engineer",
+        "squad": 3,
+        "squad_name": "Decisioning & Perso"
+      },
+      {
+        "name": "Julian Loo",
+        "role": "Business Analyst",
+        "squad": 3,
+        "squad_name": "Decisioning & Perso"
+      },
+      {
+        "name": "Jay Soeur",
+        "role": "Tech Lead",
+        "squad": 3,
+        "squad_name": "Decisioning & Perso"
+      },
+      {
+        "name": "Cheong Koo",
+        "role": "Iteration Manager",
+        "squad": 3,
+        "squad_name": "Decisioning & Perso"
+      }
+    ]
+  },
+  {
+    "group_num": 4,
+    "squads": [
+      4
+    ],
+    "members": [
+      {
+        "name": "Akshata Shanbhag",
+        "role": "Product Manager",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Venus Liu",
+        "role": "Product Designer",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Shane Mclachlan",
+        "role": "Iteration Manager (FTC)",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Umara Wazeer",
+        "role": "Business Analyst",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Siva Jonnalagadda",
+        "role": "Engineer",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Mikhail Prorekhin",
+        "role": "Engineer (C)",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 5,
+    "squads": [
+      1,
+      4
+    ],
+    "members": [
+      {
+        "name": "Kiran Sahoo",
+        "role": "QA Engineer",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Jijesh Vannatham Veettil",
+        "role": "Lead Engineer",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Amir Ostadhossein",
+        "role": "Engineer",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Sujana Kunwar",
+        "role": "Engineer (C)",
+        "squad": 4,
+        "squad_name": "Product Experience"
+      },
+      {
+        "name": "Kaustav Basu",
+        "role": "QA Engineer",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      },
+      {
+        "name": "Raj Krishnan",
+        "role": "Tech Lead",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 6,
+    "squads": [
+      7
+    ],
+    "members": [
+      {
+        "name": "Divya Behl (C)",
+        "role": "Product Manager",
+        "squad": 7,
+        "squad_name": "Marketplace"
+      },
+      {
+        "name": "Praveen HR",
+        "role": "Engineer",
+        "squad": 7,
+        "squad_name": "Marketplace"
+      },
+      {
+        "name": "Alex Levshenko",
+        "role": "Engineer (C)",
+        "squad": 7,
+        "squad_name": "Marketplace"
+      },
+      {
+        "name": "Chris Wong",
+        "role": "Associate Engineer",
+        "squad": 7,
+        "squad_name": "Marketplace"
+      },
+      {
+        "name": "Fahad Bin Abid Janjua",
+        "role": "Tech Lead",
+        "squad": 7,
+        "squad_name": "Marketplace"
+      },
+      {
+        "name": "Nisarg Kapadia",
+        "role": "Iteration Manager",
+        "squad": 7,
+        "squad_name": "Marketplace"
+      }
+    ]
+  },
+  {
+    "group_num": 7,
+    "squads": [
+      8
+    ],
+    "members": [
+      {
+        "name": "Rebecca Flarve",
+        "role": "Product Manager",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      },
+      {
+        "name": "Bianca Higginson",
+        "role": "Product Designer",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      },
+      {
+        "name": "Jules Williams",
+        "role": "Engineer",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      },
+      {
+        "name": "San Kottuthala Mathew",
+        "role": "Business Analyst",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      },
+      {
+        "name": "Farid Khan",
+        "role": "Tech Lead",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      },
+      {
+        "name": "James Sun",
+        "role": "Senior Engineer",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 8,
+    "squads": [
+      1,
+      10
+    ],
+    "members": [
+      {
+        "name": "Tommy Nguyen",
+        "role": "Senior Engineer",
+        "squad": 10,
+        "squad_name": "Digital Availability"
+      },
+      {
+        "name": "Shamith Amarawansa",
+        "role": "Engineer",
+        "squad": 10,
+        "squad_name": "Digital Availability"
+      },
+      {
+        "name": "Aditya Shankar",
+        "role": "Business Analyst (C)",
+        "squad": 10,
+        "squad_name": "Digital Availability"
+      },
+      {
+        "name": "Tu Huynh",
+        "role": "Associate Engineer",
+        "squad": 10,
+        "squad_name": "Digital Availability"
+      },
+      {
+        "name": "Glenn Mai",
+        "role": "Tech Lead",
+        "squad": 10,
+        "squad_name": "Digital Availability"
+      },
+      {
+        "name": "Alex Silva",
+        "role": "Engineer",
+        "squad": 1,
+        "squad_name": "Shop Front Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 9,
+    "squads": [
+      5,
+      8,
+      11
+    ],
+    "members": [
+      {
+        "name": "Arun Padmanabihan",
+        "role": "Lead Engineer",
+        "squad": 11,
+        "squad_name": "Manhattan Inventory"
+      },
+      {
+        "name": "Amrita Mohanty",
+        "role": "Product Manager",
+        "squad": 11,
+        "squad_name": "Manhattan Inventory"
+      },
+      {
+        "name": "Nidhin Janardhanan",
+        "role": "Iteration Manager",
+        "squad": 11,
+        "squad_name": "Manhattan Inventory"
+      },
+      {
+        "name": "Khushboo Kumari",
+        "role": "Product Manager",
+        "squad": 5,
+        "squad_name": "Product Data & Catalogue"
+      },
+      {
+        "name": "Shashank Biplav",
+        "role": "Engineer",
+        "squad": 5,
+        "squad_name": "Product Data & Catalogue"
+      },
+      {
+        "name": "Gouthami Korampalli",
+        "role": "Senior QA Engineer",
+        "squad": 8,
+        "squad_name": "Target App & Web Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 10,
+    "squads": [
+      13
+    ],
+    "members": [
+      {
+        "name": "Kunwar Karsh",
+        "role": "Product Manager",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Smita Patil",
+        "role": "Business Analyst",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Ankush Mahajan",
+        "role": "Senior QA Engineer (C)",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Monika Sharma",
+        "role": "Senior QA Engineer (C)",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Vibhas Kamal",
+        "role": "Iteration Manager (C)",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Binin Pottassery",
+        "role": "Senior Engineer",
+        "squad": 13,
+        "squad_name": "Order Management"
+      }
+    ]
+  },
+  {
+    "group_num": 11,
+    "squads": [
+      12,
+      13
+    ],
+    "members": [
+      {
+        "name": "Ashish Bhardwaj",
+        "role": "Senior Engineer",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Vineet Parvatikar",
+        "role": "QA Engineer",
+        "squad": 13,
+        "squad_name": "Order Management"
+      },
+      {
+        "name": "Pratiksha Padmaprasad",
+        "role": "Senior Engineer (C)",
+        "squad": 12,
+        "squad_name": "Manhattan Availability"
+      },
+      {
+        "name": "Sergey Markov",
+        "role": "Senior Engineer (C)",
+        "squad": 12,
+        "squad_name": "Manhattan Availability"
+      },
+      {
+        "name": "Michael Au Dong",
+        "role": "Engineer (C)",
+        "squad": 12,
+        "squad_name": "Manhattan Availability"
+      },
+      {
+        "name": "Jayani Jayatilleke",
+        "role": "Senior QA Engineer (C)",
+        "squad": 12,
+        "squad_name": "Manhattan Availability"
+      }
+    ]
+  },
+  {
+    "group_num": 12,
+    "squads": [
+      14
+    ],
+    "members": [
+      {
+        "name": "Cleo Zimakowski",
+        "role": "Product Manager",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      },
+      {
+        "name": "Alex Patten",
+        "role": "Product Designer",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      },
+      {
+        "name": "Gil Ferolino",
+        "role": "Tech Lead (C)",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      },
+      {
+        "name": "Ljubisa Pakalavic",
+        "role": "Senior Engineer",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      },
+      {
+        "name": "Sabreena Parambil",
+        "role": "Engineer (C)",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      },
+      {
+        "name": "Tyron Gyde",
+        "role": "Product Designer (C)",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      }
+    ]
+  },
+  {
+    "group_num": 13,
+    "squads": [
+      15
+    ],
+    "members": [
+      {
+        "name": "Joel Niran",
+        "role": "Product Manager",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Aidan Dao",
+        "role": "Product Designer",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Celina Lee",
+        "role": "Iteration Manager",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Pratikkumar Patel",
+        "role": "Business Analyst",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Chris Luo",
+        "role": "Tech Lead",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Ashvin Kumar Mohankumar",
+        "role": "Senior Engineer",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 14,
+    "squads": [
+      12,
+      14,
+      15
+    ],
+    "members": [
+      {
+        "name": "Jhansi Gidde",
+        "role": "Senior Engineer (C)",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Zack Kilmas",
+        "role": "Associate Engineer",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Jas Dhaliwal",
+        "role": "QA Engineer",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Atharva Telang",
+        "role": "Product Designer",
+        "squad": 15,
+        "squad_name": "Checkout Experience"
+      },
+      {
+        "name": "Laura Larkin (C)",
+        "role": "Product Manager",
+        "squad": 12,
+        "squad_name": "Manhattan Availability"
+      },
+      {
+        "name": "Fawad Amin",
+        "role": "Business Analyst (C)",
+        "squad": 14,
+        "squad_name": "Fulfilment & Collection In-Store"
+      }
+    ]
+  },
+  {
+    "group_num": 15,
+    "squads": [
+      17
+    ],
+    "members": [
+      {
+        "name": "Daniel Foulds",
+        "role": "Product Manager",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Prassannakumar Palani",
+        "role": "Product Designer",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Lakshmi Sursala",
+        "role": "Business Analyst",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Peirong Xu",
+        "role": "Engineer",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Vikas Bawa",
+        "role": "Engineer",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Hiran Peiris",
+        "role": "Engineer (C)",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      }
+    ]
+  },
+  {
+    "group_num": 16,
+    "squads": [
+      16,
+      18
+    ],
+    "members": [
+      {
+        "name": "Krish Ragunathan",
+        "role": "Product Manager",
+        "squad": 18,
+        "squad_name": "Customer Intelligence"
+      },
+      {
+        "name": "Jagath Murali",
+        "role": "Senior Engineer",
+        "squad": 18,
+        "squad_name": "Customer Intelligence"
+      },
+      {
+        "name": "Neelima Gupta",
+        "role": "Senior Engineer",
+        "squad": 18,
+        "squad_name": "Customer Intelligence"
+      },
+      {
+        "name": "Sean Choi",
+        "role": "Senior Engineer (C)",
+        "squad": 16,
+        "squad_name": "Cart & Payments"
+      },
+      {
+        "name": "Lei Zhang",
+        "role": "Senior Engineer",
+        "squad": 16,
+        "squad_name": "Cart & Payments"
+      },
+      {
+        "name": "Guangyin Song",
+        "role": "Engineer",
+        "squad": 16,
+        "squad_name": "Cart & Payments"
+      }
+    ]
+  },
+  {
+    "group_num": 17,
+    "squads": [
+      19
+    ],
+    "members": [
+      {
+        "name": "Valerie Li",
+        "role": "Product Manager",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      },
+      {
+        "name": "Leili Mack",
+        "role": "Product Manager",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      },
+      {
+        "name": "Rigel Maple",
+        "role": "Product Designer",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      },
+      {
+        "name": "Swathi Jadhav",
+        "role": "Senior Engineer",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      },
+      {
+        "name": "Michael Friedman",
+        "role": "Tech Lead",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      },
+      {
+        "name": "Andrew Andrianopoulos",
+        "role": "Business Analyst / IM",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      }
+    ]
+  },
+  {
+    "group_num": 18,
+    "squads": [
+      17,
+      19,
+      20
+    ],
+    "members": [
+      {
+        "name": "Photi Orfanidis",
+        "role": "Product Manager",
+        "squad": 20,
+        "squad_name": "Kmart App Ecosystem"
+      },
+      {
+        "name": "Janielyn Ascencio",
+        "role": "Product Designer",
+        "squad": 20,
+        "squad_name": "Kmart App Ecosystem"
+      },
+      {
+        "name": "Lija James",
+        "role": "QA Engineer",
+        "squad": 20,
+        "squad_name": "Kmart App Ecosystem"
+      },
+      {
+        "name": "Katriona Wilder",
+        "role": "Associate Engineer",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Rui Xu",
+        "role": "Tech Lead",
+        "squad": 17,
+        "squad_name": "Omni & Post Purchase Experience"
+      },
+      {
+        "name": "Lesley Laisina",
+        "role": "Engineer",
+        "squad": 19,
+        "squad_name": "Loyalty & Engagement"
+      }
+    ]
+  },
+  {
+    "group_num": 19,
+    "squads": [
+      21
+    ],
+    "members": [
+      {
+        "name": "Cherie Chan",
+        "role": "Design Technologist",
+        "squad": 21,
+        "squad_name": "Design Systems & Experimentation"
+      },
+      {
+        "name": "Will Xue",
+        "role": "Design Technologist (C)",
+        "squad": 21,
+        "squad_name": "Design Systems & Experimentation"
+      },
+      {
+        "name": "Oskar Simmons Carlsson",
+        "role": "Design Technologist",
+        "squad": 21,
+        "squad_name": "Design Systems & Experimentation"
+      },
+      {
+        "name": "Andrew Tralongo",
+        "role": "Product Designer",
+        "squad": 21,
+        "squad_name": "Design Systems & Experimentation"
+      },
+      {
+        "name": "Jordan Waje",
+        "role": "Senior Engineer",
+        "squad": 21,
+        "squad_name": "Design Systems & Experimentation"
+      },
+      {
+        "name": "Vivienne Dinh",
+        "role": "Product Designer",
+        "squad": 21,
+        "squad_name": "Design Systems & Experimentation"
+      }
+    ]
+  },
+  {
+    "group_num": 20,
+    "squads": [
+      23,
+      24
+    ],
+    "members": [
+      {
+        "name": "Antony Wei",
+        "role": "Engineer",
+        "squad": 23,
+        "squad_name": "Web Core"
+      },
+      {
+        "name": "Brian Fung",
+        "role": "Engineer",
+        "squad": 23,
+        "squad_name": "Web Core"
+      },
+      {
+        "name": "Vinodh Veeraraghavan",
+        "role": "Senior Engineer",
+        "squad": 23,
+        "squad_name": "Web Core"
+      },
+      {
+        "name": "Wei Feng",
+        "role": "Lead Engineer",
+        "squad": 23,
+        "squad_name": "Web Core"
+      },
+      {
+        "name": "EJ Cho",
+        "role": "Product Designer",
+        "squad": 24,
+        "squad_name": "Care"
+      },
+      {
+        "name": "Mason Conway",
+        "role": "Product Manager",
+        "squad": 24,
+        "squad_name": "Care"
+      }
+    ]
+  }
+]
