@@ -1,0 +1,8 @@
+# Generated journey artefacts — rebuild with journey/build_journey.py
+journey/out/
+
+# Your filled-in board extract; commit it deliberately if it should be shared
+journey/journey.yaml
+
+__pycache__/
+*.pyc
