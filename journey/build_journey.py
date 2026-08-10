@@ -68,6 +68,10 @@ class Journey:
         self.title = data.get("title") or "Untitled journey"
         self.source = data.get("source") or ""
         self.primary_actor = data.get("primary_actor") or ""
+        # When the spine is synthetic, its steps are consolidations rather than
+        # literal board objects, so only annotations reconcile against the board's
+        # object count and the connector total is advisory rather than exact.
+        self.synthetic_spine = bool(data.get("synthetic_spine"))
         self.expected = data.get("expected_counts") or {}
         self.phases = data.get("phases") or []
         self.lanes = data.get("lanes") or []
@@ -115,6 +119,10 @@ class Journey:
         return [a for a in self.annotations if not a.get("step")]
 
     def object_count(self) -> int:
+        """Board objects represented. A synthetic spine does not add board objects,
+        so only annotations count; otherwise steps are literal cards and count too."""
+        if self.synthetic_spine:
+            return len(self.annotations)
         return len(self.steps) + len(self.branch_steps) + len(self.annotations)
 
     def connector_count(self) -> int:
@@ -239,21 +247,32 @@ def _check_counts(journey: Journey, report: Report) -> None:
             "cannot be verified. Count the cards and stickies on the original board."
         )
     elif journey.object_count() != expected_objects:
+        if journey.synthetic_spine:
+            breakdown = f"{len(journey.annotations)} annotations (synthetic spine excluded)"
+        else:
+            breakdown = (
+                f"{len(journey.steps)} steps + {len(journey.branch_steps)} branch steps + "
+                f"{len(journey.annotations)} annotations"
+            )
         report.error(
             f"Object count mismatch: the original board has {expected_objects} objects "
-            f"but this file accounts for {journey.object_count()} "
-            f"({len(journey.steps)} steps + {len(journey.branch_steps)} branch steps + "
-            f"{len(journey.annotations)} annotations)."
+            f"but this file accounts for {journey.object_count()} ({breakdown})."
         )
 
     expected_connectors = journey.expected.get("connectors")
     if expected_connectors is None:
         report.warn("`expected_counts.connectors` is not set, so connectors are not reconciled.")
     elif journey.connector_count() != expected_connectors:
-        report.error(
+        message = (
             f"Connector count mismatch: the original board has {expected_connectors} "
             f"connectors but this file accounts for {journey.connector_count()}."
         )
+        # With a synthetic spine the drawn connectors are a simplification, so a
+        # mismatch is informative rather than a loss of a real board edge.
+        if journey.synthetic_spine:
+            report.warn(message + " (advisory: spine is synthetic)")
+        else:
+            report.error(message)
 
 
 def render_l0(journey: Journey) -> str:

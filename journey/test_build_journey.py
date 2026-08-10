@@ -113,6 +113,44 @@ class LossIsRejected(unittest.TestCase):
         )
 
 
+class SyntheticSpine(unittest.TestCase):
+    """A synthetic spine consolidates cards, so only annotations reconcile."""
+
+    def base(self) -> dict:
+        return {
+            "title": "t",
+            "synthetic_spine": True,
+            "expected_counts": {"objects": 2},
+            "phases": [{"id": "P1", "name": "P1"}],
+            "lanes": [{"id": "L1", "name": "L1"}],
+            "steps": [
+                {"id": "S1", "phase": "P1", "name": "one", "lanes": ["L1"]},
+                {"id": "S2", "phase": "P1", "name": "two", "lanes": ["L1"]},
+            ],
+            "annotations": [
+                {"id": "N1", "step": "S1", "type": "info", "text": "a"},
+                {"id": "N2", "step": "S2", "type": "info", "text": "b"},
+            ],
+        }
+
+    def test_steps_do_not_count_toward_board_objects(self):
+        report = check(Journey(self.base()))
+        self.assertEqual(report.errors, [])
+
+    def test_annotation_miscount_is_still_caught(self):
+        data = self.base()
+        data["annotations"].pop()
+        report = check(Journey(data))
+        self.assertTrue(any("Object count mismatch" in e for e in report.errors))
+
+    def test_connector_mismatch_is_advisory_not_fatal(self):
+        data = self.base()
+        data["expected_counts"]["connectors"] = 999
+        report = check(Journey(data))
+        self.assertEqual(report.errors, [])
+        self.assertTrue(any("advisory" in w for w in report.warnings))
+
+
 class MissingCountsWarn(unittest.TestCase):
     def test_absent_expected_counts_warns_rather_than_passing_silently(self):
         data = copy.deepcopy(load())

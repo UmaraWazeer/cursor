@@ -2,76 +2,82 @@
 
 ## 1. Status of the source artefact
 
-The board was supplied as a single downscaled screenshot. At that resolution the
-sticky-note and card text is roughly two pixels tall, so **none of the wording on
-the board is legible** — not the phase labels along the top, not the swimlane
-labels down the left, not the content of any note.
+The board first arrived as a single downscaled screenshot in which the note text
+was about two pixels tall and completely illegible. It was then supplied as a
+**PDF** (`Copy_of_PIM_Service_Blueprint_049c.pdf`), which turned out to be a single
+flattened **5417 × 3738** image with no text layer. Extracting that embedded image
+and tiling it into overlapping high-resolution crops makes every card and sticky
+legible, so the board has now been **fully transcribed** into `journey/journey.yaml`
+(85 objects) and the simplified views regenerated from it.
 
-Routes tried to reach the underlying board instead of the screenshot:
-
-| Route | Result |
-| --- | --- |
-| Locate the image file on disk to read it at native resolution | Not present; only the downscaled copy exists |
-| Miro `board_search_boards` | `Board search is temporarily unavailable` (retried) |
-| Miro `space_list` → `space_list_boards` | Two spaces visible (`Agility Enablement Area`, `PI planning`), both `Access forbidden` |
-| FigJam `get_figjam` on the squad's known board `mpDzwlze9tYwtzM0Q6FJcP` | Returns the *T1 PDC Rich Pictures* board — a different artefact |
-| Confluence / Jira search for a matching journey map or board link | No page matches this board's shape |
-
-So everything below in §2 and §3 is derived from **geometry only** — the position,
-size, colour and connector pattern of objects, which are readable at this
-resolution. Section §4 onward is the method and toolkit, which are independent of
-the wording. To finish the content pass, see §8.
+For the record, before the PDF arrived these routes to the live board were tried
+and all failed: the image was not on disk at native resolution; Miro
+`board_search_boards` returned `Board search is temporarily unavailable`; both
+visible Miro spaces (`Agility Enablement Area`, `PI planning`) returned
+`Access forbidden`; the squad's known FigJam board `mpDzwlze9tYwtzM0Q6FJcP` is the
+*T1 PDC Rich Pictures* board, a different artefact; and Confluence/Jira search
+surfaced no page matching this board's shape. The PDF was the unlock.
 
 ## 2. What the artefact is
 
-It is a **service blueprint**, not a plain journey map. The tell is the dashed
-horizontal rule immediately below the first swimlane: in blueprint grammar that is
-the *line of interaction*, separating what the customer sees from backstage
-process. Structure:
+It is a **PIM (Product Information Management) service blueprint** for Kmart — the
+end-to-end path a product/SKU takes from Merch creation to being published and
+discoverable online, illustrated by a customer persona ("Mary" buying an Easter
+basket). It is a service blueprint, not a plain journey map: the dashed horizontal
+rule below the first swimlane is the *line of interaction*, separating what the
+customer sees from backstage process. Structure:
 
-- **5 phases** across the top, marked by the dark navy header band split into five
-  equal segments.
-- **6 swimlanes** down the left, marked by the dark blue left rail.
-- Each phase is subdivided into about four placeholder columns, giving a
-  pre-drawn grid of roughly **20 columns × 14 rows** of empty cells.
-- **A seventh band, detached below the main body**, holding an unconnected cluster
-  of notes.
-- Roughly **60–75 content objects** — cards plus yellow, pink and green stickies,
-  each carrying an author avatar dot — joined by connectors.
+- **5 phases** across the top — but the headers are unlabelled `Phase` placeholders,
+  so the phases carry no names on the board itself. In the model they are named for
+  the process stage they contain: *Create & register → Capture imagery → Enrich &
+  ingest → Copywrite → Categorise, publish & discover*.
+- **6 swimlanes**: `User actions` (front stage), then backstage `Merch Team →
+  Photography Studios → Online Team & Merkle → External Suppliers → Marketing &
+  Website`.
+- Each phase is subdivided into placeholder columns, giving a large pre-drawn grid
+  that is mostly empty cells.
+- **A seventh band, detached below the main body** (`Additional Notes`), holding an
+  unconnected cluster of ~10 systemic observations.
+- **85 content objects** — process cards plus yellow (fact), pink (pain) and green
+  (follow-up question) stickies, each carrying an author avatar dot — joined by
+  connectors that mostly run left-to-right along the `Online Team & Merkle` lane.
 
 ## 3. Where the complexity actually sits
 
-This is the part worth acting on. Content is very unevenly distributed:
+This is the part worth acting on. Content is very unevenly distributed across the
+85 objects:
 
-| Lane | Occupancy |
-| --- | --- |
-| 1 (front stage, above the line of interaction) | Empty except for one cluster in the **final** phase |
-| 2 | Concentrated in phase 1, small cluster in phase 2 |
-| 3 | Short chain in phases 1–2 |
-| **4** | **The spine — a near-continuous chain of ~12–15 cards from phase 1 to phase 4, carrying the heaviest yellow/pink annotation load** |
-| 5 | Sparse, phases 1–2 only |
-| 6 | Two disconnected clusters, one in phase 2 and one in phases 4–5 |
-| Detached bottom band | ~6–8 notes, no connectors into the flow |
+| Lane | Objects | Occupancy |
+| --- | --- | --- |
+| User actions (front stage) | 5 | Customer "Mary" flow, **only in the final phase** |
+| Merch Team | 11 | Concentrated in phase 1 (create & register) |
+| Photography Studios | 11 | Phase 2, heavy fact/question annotation |
+| **Online Team & Merkle** | **35** | **The backbone — a continuous chain end to end, carrying almost all the pain and risk notes** |
+| External Suppliers | 4 | Phase 3 only |
+| Marketing & Website | 8 | Final phase (channel feeds) |
+| Additional Notes (detached) | 10 | No connectors into the flow |
 
 Five findings follow from that:
 
-1. **The grid spends space where there is no content.** Around 70% of the objects
-   sit in one lane of six and two phases of five, but the grid reserves equal area
-   for every cell. The informative region is compressed while empty cells consume
-   most of the canvas.
+1. **One lane carries the board.** The `Online Team & Merkle` lane holds 35 of 85
+   objects — over 40% — in a single continuous chain, while the grid reserves equal
+   area for every cell. The informative region is compressed while empty cells
+   consume most of the canvas.
 2. **Four kinds of information share one plane** — sequence on the x-axis,
    ownership on the y-axis, commentary in the sticky colour, and dependency in the
    connectors. Each is legible alone; together they multiply.
-3. **A few long-distance connectors cost the most comprehension.** One runs the
-   full height of the board, from mid-canvas down past every lane into the bottom
-   band. The final-phase clusters in lanes 1 and 6 also reach back to the middle
-   of the board. These long runs are what make the map feel unreadable.
-4. **The detached bottom band is unanchored content** — notes that belong to the
-   discussion but have no position in the flow, so they are invisible to anyone
-   reading the journey.
-5. **The front stage is nearly empty.** A blueprint whose customer lane is blank
-   until the last phase is really a *process and systems* map in blueprint
-   clothing. The lane structure is fighting the content it holds.
+3. **The long connectors run the length of the Merkle lane.** The backbone threads
+   left-to-right across all five phases, and the final-phase `Marketing & Website`
+   and `User actions` clusters reach back to it. These long runs are what make the
+   board feel unreadable.
+4. **The detached `Additional Notes` band is unanchored content** — 10 systemic
+   observations (e.g. *"Two systems so two truths"*, *"All systems are MS DOS from
+   the 90's"*) that belong to the discussion but have no position in the flow, so
+   they are invisible to anyone reading the journey.
+5. **The front stage is nearly empty.** The customer lane is blank until the final
+   phase, so this is really a *process and systems* map in blueprint clothing — the
+   backstage machinery that has to complete before "Mary" can find the product. The
+   lane structure is fighting the content it holds.
 
 ## 4. The principle
 
@@ -147,14 +153,18 @@ thrown away. L1 is the working artefact that points from one to the other.
 The generator in `journey/` enforces these mechanically and fails the build if any
 are violated:
 
-- **Object count** — the number of register rows must equal the
-  `expected_counts.notes` you record from the original board.
+- **Object count** — the objects represented must equal the
+  `expected_counts.objects` you record from the original board. When the spine is a
+  consolidation of many cards rather than the literal cards themselves, set
+  `synthetic_spine: true` and only the annotations (the literal cards and stickies)
+  reconcile — the synthetic steps are excluded so the count stays honest.
 - **No orphans** — every annotation must resolve to a declared step, or be
-  explicitly marked `step: null` with a reason.
+  explicitly marked `step: null` with an `unanchored_reason`.
 - **No dangling references** — every `phase`, `lane` and `step` referenced must be
-  declared.
-- **Connector accounting** — every connector on the original board must be either
-  on the spine or a declared named branch, and the totals must reconcile.
+  declared, and no IDs may collide.
+- **Connector accounting** — with a literal spine, connector totals must reconcile;
+  with a `synthetic_spine` the connector total is advisory, since the drawn edges
+  are themselves a simplification.
 - **Verbatim preservation** — the register carries the original wording in `text`;
   any shortening lives in a separate `summary` field, so the original is never
   overwritten.
@@ -163,6 +173,15 @@ Because these are assertions rather than good intentions, "we simplified it and
 lost nothing" becomes a claim you can demonstrate.
 
 ## 8. Using the toolkit
+
+The real board has already been transcribed into `journey/journey.yaml` (85
+objects, `synthetic_spine: true`). Regenerate the simplified views with:
+
+```bash
+python3 journey/build_journey.py journey/journey.yaml
+```
+
+To model a different board, start from the annotated template instead:
 
 ```bash
 cp journey/journey.example.yaml journey/journey.yaml   # then fill in from the board
@@ -189,16 +208,22 @@ something that must not be lost silently and asserts the build rejects it:
 cd journey && python3 test_build_journey.py
 ```
 
-## 9. To complete the content pass
+## 9. What is now done, and what to check
 
-Any one of these unblocks the actual reading of your board:
+The content pass is complete: the PDF was the source that unblocked it, the board
+is transcribed into `journey/journey.yaml`, and the L0/L1/L2 views plus the Miro
+DSL are generated and reconcile against all 85 objects.
 
-1. **The board URL** (Miro or FigJam). This is much the best option — it gives the
-   text, colours, authors and connector endpoints directly, and the register in
-   §5's Move 1 can then be populated automatically rather than by hand.
-2. **A PDF export**, which keeps the text as text at any zoom.
-3. **A set of cropped screenshots**, one per phase or per swimlane, at readable
-   zoom.
+What remains is a **review of the model's judgement calls**, none of which lose
+data (everything is verbatim in the L2 register regardless):
 
-With the source in hand the extraction is mechanical, and §5 Moves 2–5 become a
-review conversation about the spine rather than a transcription exercise.
+1. **Phase names.** The board's phases were blank `Phase` placeholders; the five
+   stage names are the model's interpretation of the flow. Rename freely.
+2. **Spine granularity.** The 8 spine steps consolidate ~44 process cards. If the
+   squad wants a step split or merged, adjust `steps` — the attached cards move with
+   their `step` reference.
+3. **A few source-legibility calls.** The board is a flattened raster, so one or two
+   long stickies and a couple of avatar/system labels were read as best as the pixels
+   allowed (e.g. studio name "Melohd"/"Melodie", "MAM"/"MAM?"). These are flagged
+   with `?` in the text and are worth a second eye. The live board URL would let
+   these be confirmed exactly.
