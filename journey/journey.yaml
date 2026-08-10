@@ -1,0 +1,859 @@
+# PIM Service Blueprint — simplified, lossless journey model.
+#
+# Transcribed from Copy_of_PIM_Service_Blueprint_049c.pdf (a single flattened
+# 5417x3738 image; text read from high-resolution crops). Wording in `text` is
+# verbatim from the board; light OCR-from-raster caveats may apply to a few long
+# stickies. The board's phase headers were unlabelled "Phase" placeholders, so the
+# five phases below are named for the process stage they contain. Swimlanes map
+# 1:1 to the board's lanes. Every card and sticky on the board is represented
+# either as a spine/branch step or as an annotation.
+
+title: PIM Service Blueprint
+source: Copy_of_PIM_Service_Blueprint_049c.pdf (Miro/FigJam export)
+primary_actor: A product (SKU) travelling from Merch creation to published & discoverable online
+
+# The 8-step spine is a consolidation of the board's ~44 process cards, so it does
+# not add board objects. Only the 85 annotations (every literal card + sticky)
+# reconcile against the board's object count; connectors are advisory.
+synthetic_spine: true
+
+expected_counts:
+  objects: 85
+
+phases:
+  - id: P1
+    name: Create & register
+  - id: P2
+    name: Capture imagery
+  - id: P3
+    name: Enrich & ingest
+  - id: P4
+    name: Copywrite
+  - id: P5
+    name: Categorise, publish & discover
+
+lanes:
+  - id: L1
+    name: User actions
+    front_stage: true
+  - id: L2
+    name: Merch Team
+  - id: L3
+    name: Photography Studios
+  - id: L4
+    name: Online Team & Merkle
+  - id: L5
+    name: External Suppliers
+  - id: L6
+    name: Marketing & Website
+
+# The spine: the product's end-to-end path, one step per major stage. The board's
+# detailed process cards attach to these as `info`/`system` annotations so the
+# spine stays readable while nothing is dropped.
+steps:
+  - id: S1
+    phase: P1
+    name: Product & pricing created, SKU registered
+    actors: [Merch Team, Buying Team]
+    systems: [DSS, PLM, Mainframe, PIM]
+    lanes: [L2]
+
+  - id: S2
+    phase: P1
+    name: PO raised → keycode → visibility in PIM; sample routed to studio
+    actors: [Merch Team]
+    systems: [Inventory excel sheet, PIM]
+    lanes: [L2]
+
+  - id: S3
+    phase: P2
+    name: Photography — sample shot, retouched and delivered
+    actors: [Photography Studios, External Suppliers]
+    systems: [SKU Library, Dropbox, MAM]
+    lanes: [L3, L5]
+
+  - id: S4
+    phase: P3
+    name: Merkle builds pipeline report, assigns studios and tracks SKUs
+    actors: [Online Team & Merkle]
+    systems: [Mainframe export, Pipeline report, SKU Library]
+    lanes: [L4]
+
+  - id: S5
+    phase: P3
+    name: Assets ingested and mandatory data confirmed
+    actors: [Online Team & Merkle, External Suppliers]
+    systems: [MAM, PIM, SKU Library]
+    lanes: [L4, L5]
+
+  - id: S6
+    phase: P4
+    name: Copy written in Jarvis and QA'd against WGLL
+    actors: [Copywriters, Online Team & Merkle]
+    systems: [Jarvis, PIM]
+    lanes: [L4]
+
+  - id: S7
+    phase: P5
+    name: Category mapping, final QA and publish to "Ready for Release"
+    actors: [Online Team & Merkle]
+    systems: [PIM, ERP/Mainframe, Sales Nav mapping]
+    lanes: [L4]
+
+  - id: S8
+    phase: P5
+    name: Product data feeds channels; customer discovers and buys
+    actors: [Marketing & Website, Customer]
+    systems: [Commercetools, Constructor, Google Feed, Braze, Website]
+    lanes: [L6, L1]
+
+branches:
+  - id: B1
+    name: Sample lost or TAT missed
+    from_step: S4
+    rejoins: S5
+    steps:
+      - id: B1.1
+        name: Merkle requests a fresh sample / follows up with the studio
+        actors: [Online Team & Merkle]
+        systems: [Pipeline report]
+        lanes: [L4]
+
+  - id: B2
+    name: SKU suspended until mandatory data resolved
+    from_step: S5
+    rejoins: S6
+    steps:
+      - id: B2.1
+        name: SKU held in "suspended" status; Merkle chases owners
+        actors: [Online Team & Merkle]
+        systems: [PIM, SKU Library]
+        lanes: [L4]
+
+cross_links:
+  - from: S7
+    to: S1
+    label: PIM data does not currently flow back into Merchandising systems (broken loop)
+
+annotations:
+  # ---- L1 User actions (front stage): the customer "Mary" journey ----
+  - id: U01
+    step: S8
+    type: info
+    text: Mary searches for Easter Baskets on Google
+    lane: L1
+    phase: P5
+    colour: white
+    author: Customer (Mary)
+  - id: U02
+    step: S8
+    type: info
+    text: Mary sees an Easter Basket at Kmart and clicks to read more about it
+    lane: L1
+    phase: P5
+    colour: white
+    author: Customer (Mary)
+  - id: U03
+    step: S8
+    type: info
+    text: Mary reviews the PDP and looks at product details like the size, material, image and price
+    lane: L1
+    phase: P5
+    colour: white
+    author: Customer (Mary)
+  - id: U04
+    step: S8
+    type: info
+    text: Mary wants to see other baskets so clicks the Easter Egg Hunt category
+    lane: L1
+    phase: P5
+    colour: white
+    author: Customer (Mary)
+  - id: U05
+    step: S8
+    type: info
+    text: Mary finds a different basket, reads the details and adds to her cart
+    lane: L1
+    phase: P5
+    colour: white
+    author: Customer (Mary)
+
+  # ---- L2 Merch Team ----
+  - id: MC01
+    step: S1
+    type: info
+    text: "Merch team enters products and pricing in DSS"
+    summary: System — DSS
+    lane: L2
+    phase: P1
+    colour: white
+    author: Merch Team
+  - id: MC02
+    step: S1
+    type: info
+    text: "Buying team registers each new SKU and marks 'Online – Yes'"
+    summary: System — System?
+    lane: L2
+    phase: P1
+    colour: white
+    author: Merch Team
+  - id: MC03
+    step: S1
+    type: info
+    text: "Merch team enters pricing in PLM"
+    summary: System — PLM
+    lane: L2
+    phase: P1
+    colour: white
+    author: Merch Team
+  - id: MC04
+    step: S1
+    type: info
+    text: "Product Data flows from PLM & DSS to Mainframe"
+    summary: System — Mainframe
+    lane: L2
+    phase: P1
+    colour: white
+    author: Merch Team
+  - id: MC05
+    step: S2
+    type: info
+    text: "Purchase order raised triggering keycode, which enables visibility in PIM"
+    summary: System — Inventory excel sheet
+    lane: L2
+    phase: P1
+    colour: white
+    author: Merch Team
+  - id: MC06
+    step: S2
+    type: info
+    text: "Merch team either sends or requests sample to be set to studio for photography"
+    summary: System? Manual?
+    lane: L2
+    phase: P1
+    colour: white
+    author: Merch Team
+  - id: MN01
+    step: S1
+    type: system
+    text: Automatically created in PIM
+    lane: L2
+    phase: P1
+    colour: yellow
+    author: Merch Team
+  - id: MN02
+    step: S2
+    type: system
+    text: This is automated if marked online and no photo is available
+    lane: L2
+    phase: P1
+    colour: yellow
+    author: Merch Team
+  - id: MN03
+    step: S1
+    type: opportunity
+    text: "Observation / Fact: Longer term plans exist to merge unify DSS & PLM into PLM."
+    lane: L2
+    phase: P1
+    colour: green
+    author: Merch Team
+  - id: MN04
+    step: S2
+    type: question
+    text: "Follow Up Question: What system is the PO raised and signed off?"
+    lane: L2
+    phase: P1
+    colour: green
+    author: Merch Team
+  - id: MN05
+    step: S2
+    type: question
+    text: Is it a manual or automated notification send to supplier to send Kmart/Anko sample to studio - is it actually automated?
+    lane: L2
+    phase: P1
+    colour: green
+    author: Merch Team
+
+  # ---- L3 Photography Studios ----
+  - id: PC01
+    step: S3
+    type: info
+    text: Samples arrive from suppliers or buying teams
+    summary: System?
+    lane: L3
+    phase: P2
+    colour: white
+    author: Photography Studios
+  - id: PC02
+    step: S3
+    type: info
+    text: For KMART/ANKO Products and certain external products, such as Everlast, photography studios photographs products
+    summary: System?
+    lane: L3
+    phase: P2
+    colour: white
+    author: Photography Studios
+  - id: PC03
+    step: S3
+    type: info
+    text: Studios retouch and format final images (cropping, color correction, etc.) to meet technical specs
+    summary: System?
+    lane: L3
+    phase: P2
+    colour: white
+    author: Photography Studios
+  - id: PC04
+    step: S3
+    type: info
+    text: Final images are transferred back via Dropbox
+    summary: System — Dropbox
+    lane: L3
+    phase: P2
+    colour: white
+    author: Photography Studios
+  - id: PC05
+    step: S3
+    type: info
+    text: "TAT: Wellcom < 5 days; Kanvid < 10 business days; Melodie < 5 business days"
+    lane: L3
+    phase: P2
+    colour: white
+    author: Photography Studios
+  - id: PN01
+    step: S3
+    type: info
+    text: 80% of Kmart range is inhouse, so we have to do all of the photography
+    lane: L3
+    phase: P2
+    colour: yellow
+    author: Photography Studios
+  - id: PN02
+    step: S3
+    type: info
+    text: Different photography processes if the product is Kmart/Anko versus external supplier (ie Cadbury, Lego)
+    lane: L3
+    phase: P2
+    colour: yellow
+    author: Photography Studios
+  - id: PN03
+    step: S3
+    type: info
+    text: External products such as Everlast get imagery done internally
+    lane: L3
+    phase: P2
+    colour: yellow
+    author: Photography Studios
+  - id: PN04
+    step: S4
+    type: question
+    text: "Follow Up Question: What is the Mainframe system and what information flows into/out of it? Why is Pipeline Report pulled from Mainframe?"
+    lane: L3
+    phase: P2
+    colour: green
+    author: Photography Studios
+  - id: PN05
+    step: S5
+    type: system
+    text: "Sku Lib. External Suppliers upload product data to this portal (everlast - no photograph)"
+    lane: L3
+    phase: P2
+    colour: yellow
+    author: Photography Studios
+  - id: PN06
+    step: S3
+    type: opportunity
+    text: Some of our top studio partners also now have sophisticated software that either needs to be powered by our data (but it is not prioritised) and/or has features we could leverage for automation when partnered with the DAM coming to Kmart
+    lane: L3
+    phase: P2
+    colour: yellow
+    author: Photography Studios
+  - id: PN07
+    step: S3
+    type: info
+    text: For certain external suppliers, they photograph their own products. Examples include lego.
+    lane: L3
+    phase: P2
+    colour: yellow
+    author: Photography Studios
+
+  # ---- L4 Online Team & Merkle (the operational backbone) ----
+  - id: OC01
+    step: S4
+    type: info
+    text: PIM autopopulates fields from Mainframe. Also, the Merkle team pull data sources from DSS+, PLM, SKUlibrary, PIM and the site and put into a file
+    summary: System — Emailed export from Mainframe
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC02
+    step: S4
+    type: info
+    text: A macro then pulls the data sources together into the excel based pipeline report. Creating the report takes a minimum of three hours
+    summary: System — Emailed export from Mainframe
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC03
+    step: S4
+    type: info
+    text: Merkle monitors incoming keycodes through weekly Pipeline Report every Monday, which provides a snapshot listing new and upcoming products, sample status, and due dates
+    summary: System — Emailed export from Mainframe
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC04
+    step: S4
+    type: info
+    text: Merkle decides which studio (Wellcom, Kanvid, Melohd) will handle the item based on category, complexity, or TAT capacity.
+    summary: System — ?
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC05
+    step: S4
+    type: info
+    text: "Merkle extracts the list of upcoming non-RAG SKUs from the pipeline report (typically those going live in the next 3 months) and 'binds' them into the SKUlibrary portal"
+    summary: System — Pipeline report and SKU Library
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC06
+    step: S4
+    type: info
+    text: "Every Monday, Merkle extracts delayed or due-for-shoot SKUs from the 'photography bucket'. Any product missing a sample or stuck >4 weeks is flagged for escalation"
+    summary: System — Pipeline report
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC07
+    step: S5
+    type: info
+    text: Merkle confirms that the images meet resolution/format requirements.
+    summary: System — PIM
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC08
+    step: S5
+    type: info
+    text: Photography uploaded to MAM which automatically associates the delivered images with the correct SKU in the PIM
+    summary: System — MAM? or PIM
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC09
+    step: S5
+    type: info
+    text: Confirm that each new SKU has the required specification (PS), packaging artwork (PA), disclaimers, and any other mandatory data before copywriting begins.
+    summary: System — ?
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: OC10
+    step: S6
+    type: info
+    text: Merkle passes SKU to writing team who use Jarvis to write copy
+    summary: System — Jarvis
+    lane: L4
+    phase: P4
+    colour: white
+    author: Online Team & Merkle
+  - id: OC11
+    step: S6
+    type: info
+    text: Copy Writers source data from DSS+ (GM) and PLM (apparel) portals, plus instruction manuals.
+    summary: System — Jarvis
+    lane: L4
+    phase: P4
+    colour: white
+    author: Online Team & Merkle
+  - id: OC12
+    step: S6
+    type: info
+    text: "From source material, they manually compile Title from PIM/PLM, 'Why buy' intro + bullet point features, Mandatory disclaimers, using standard Kmart format"
+    summary: System — Jarvis
+    lane: L4
+    phase: P4
+    colour: white
+    author: Online Team & Merkle
+  - id: OC13
+    step: S6
+    type: question
+    text: Assuming Merkle receives copy back?
+    summary: System — ?
+    lane: L4
+    phase: P4
+    colour: white
+    author: Online Team & Merkle
+  - id: OC14
+    step: S6
+    type: info
+    text: "Merkle QAs brand tone-of-voice guidelines, checks for mandatory disclaimers (e.g., safety warnings), and ensures consistency with Kmart's style rules ie 'What Good Looks Like' (WGLL)"
+    summary: System — #
+    lane: L4
+    phase: P4
+    colour: white
+    author: Online Team & Merkle
+  - id: OC15
+    step: S6
+    type: info
+    text: Once copy is fully approved, it moves to a 'publish-ready' status in the Product Information Management (PIM) system
+    summary: System — #
+    lane: L4
+    phase: P4
+    colour: white
+    author: Online Team & Merkle
+  - id: OC16
+    step: S7
+    type: info
+    text: Ensure that each SKU's primary category corresponds correctly with the ERP system's categorisation and the product's use case
+    summary: System — PIM + ERP in Mainframe
+    lane: L4
+    phase: P5
+    colour: white
+    author: Online Team & Merkle
+  - id: OC17
+    step: S7
+    type: info
+    text: Performs a bulk upload of primary categories based on the ERP-to-Sales Nav mapping file.
+    summary: System — PIM + ERP to sales file
+    lane: L4
+    phase: P5
+    colour: white
+    author: Online Team & Merkle
+  - id: OC18
+    step: S7
+    type: info
+    text: Once the product has its correct category assigned, Merkle performs a full quality assurance (QA) review – image, copy, attributes, fulfilment channel
+    summary: System — PIM + ERP to sales file
+    lane: L4
+    phase: P5
+    colour: white
+    author: Online Team & Merkle
+  - id: OC19
+    step: S7
+    type: info
+    text: Once published, Merkle then switches to ongoing site maintenance
+    summary: System — PIM
+    lane: L4
+    phase: P5
+    colour: white
+    author: Online Team & Merkle
+  - id: OC20
+    step: S5
+    type: info
+    text: Merkle tracks and follows up with relevant teams (buyer, supplier, or compliance).
+    lane: L4
+    phase: P3
+    colour: white
+    author: Online Team & Merkle
+  - id: ON01
+    step: S4
+    type: info
+    text: Merkle uses pipeline logic to forecast upcoming photography volumes and shares these forecasts with studios
+    lane: L4
+    phase: P3
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON02
+    step: S4
+    type: info
+    text: Pipeline lookup report - allows you to check status of single products - use to respond to questions form Merch
+    lane: L4
+    phase: P3
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON03
+    step: S4
+    type: info
+    text: Report includes Target and Kmart keycodes
+    lane: L4
+    phase: P3
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON04
+    step: S7
+    type: risk
+    text: "Observation / Fact: Pim data does not currently go back into Merchandising systems"
+    lane: L4
+    phase: P3
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON05
+    step: S6
+    type: info
+    text: Pipeline report used to prioritise SKU's for copy writing
+    lane: L4
+    phase: P4
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON06
+    step: S4
+    type: pain
+    text: If a sample is lost (>4 weeks with no resolution), Merkle requests a fresh sample. If TAT is not met or images are incorrect, Merkle follows up with the studio.
+    lane: L4
+    phase: P3
+    colour: pink
+    author: Online Team & Merkle
+  - id: ON07
+    step: S5
+    type: pain
+    text: "Weekly sweep of 'awaiting content' bucket; Merkle emails suppliers for any missing assets, then escalates to the BA team after 2 weeks"
+    lane: L4
+    phase: P3
+    colour: pink
+    author: Online Team & Merkle
+  - id: ON08
+    step: S5
+    type: risk
+    text: If a SKU lacks critical info, Merkle "suspends" it until resolved
+    lane: L4
+    phase: P3
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON09
+    step: S5
+    type: risk
+    text: Any SKU missing mandatory data or disclaimers remains in "suspended" status until the issue is fixed.
+    lane: L4
+    phase: P5
+    colour: pink
+    author: Online Team & Merkle
+  - id: ON10
+    step: S7
+    type: info
+    text: Approved copy + final images = correct attributes → the SKU is now ready for Category Mapping
+    lane: L4
+    phase: P5
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON11
+    step: S7
+    type: info
+    text: This process is typically done on a regular (e.g., fortnightly) schedule when products first enter the PIM workflow
+    lane: L4
+    phase: P5
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON12
+    step: S7
+    type: info
+    text: "Every Monday, teams review the 'Product Primary Categories' buckets for both Australia and New Zealand. Using the provided guidelines, missing or invalid categories are corrected by adding the most relevant new or updated category."
+    lane: L4
+    phase: P5
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON13
+    step: S7
+    type: info
+    text: "Once the product passes the QA checklist, its status changes to 'Ready for Release,' and it is then moved out of the workflow into the published state in the PIM (Product Information Management) system."
+    lane: L4
+    phase: P5
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON14
+    step: S8
+    type: info
+    text: The released products become visible on the Kmart website.
+    lane: L4
+    phase: P5
+    colour: yellow
+    author: Online Team & Merkle
+  - id: ON15
+    step: S7
+    type: info
+    text: For products that are part of a catalogue or specific promotional campaigns, Merkle ensures that they appear correctly in dedicated advert listings and that any updates required by marketing teams are implemented.
+    lane: L4
+    phase: P5
+    colour: yellow
+    author: Online Team & Merkle
+
+  # ---- L5 External Suppliers ----
+  - id: EC01
+    step: S5
+    type: info
+    text: As soon as a SKU is briefed, the portal automatically sends the supplier an email notification—with due dates—for uploading all required assets
+    summary: System — SKU Library
+    lane: L5
+    phase: P3
+    colour: white
+    author: External Suppliers
+  - id: EC02
+    step: S3
+    type: info
+    text: If photography not available, sample sent to studio
+    summary: System — ??
+    lane: L5
+    phase: P3
+    colour: white
+    author: External Suppliers
+  - id: EC03
+    step: S5
+    type: info
+    text: Non-RAG suppliers upload finished product images
+    summary: System — SKU Library
+    lane: L5
+    phase: P3
+    colour: white
+    author: External Suppliers
+  - id: EC04
+    step: S5
+    type: info
+    text: Upload Product Specifications (PS)
+    summary: System — SKU Library
+    lane: L5
+    phase: P3
+    colour: white
+    author: External Suppliers
+
+  # ---- L6 Marketing & Website ----
+  - id: WC01
+    step: S8
+    type: info
+    text: Autofeeds relevant data from PIM to Commercetools
+    summary: System — PIM to Commercetools
+    lane: L6
+    phase: P5
+    colour: white
+    author: Marketing & Website
+  - id: WC02
+    step: S8
+    type: info
+    text: product data sent to Google
+    summary: System — Google Feed
+    lane: L6
+    phase: P5
+    colour: white
+    author: Marketing & Website
+  - id: WC03
+    step: S8
+    type: info
+    text: Product data available to Constructor to display on Website
+    summary: System — Constructor
+    lane: L6
+    phase: P5
+    colour: white
+    author: Marketing & Website
+  - id: WC04
+    step: S8
+    type: info
+    text: Commercetools API to Braze
+    summary: System — CT API to Braze
+    lane: L6
+    phase: P5
+    colour: white
+    author: Marketing & Website
+  - id: WC05
+    step: S8
+    type: system
+    text: Product Stock and current SOH?
+    summary: System — SOH?
+    lane: L6
+    phase: P5
+    colour: white
+    author: Marketing & Website
+  - id: WN01
+    step: S3
+    type: system
+    text: Now Wellcom
+    lane: L6
+    phase: P5
+    colour: pink
+    author: Marketing & Website
+  - id: WN02
+    step: S5
+    type: system
+    text: Sku Lib - bulk download
+    lane: L6
+    phase: P5
+    colour: pink
+    author: Marketing & Website
+  - id: WN03
+    step: S8
+    type: question
+    text: "Follow Up Question: What data flows for the Personalisation"
+    lane: L6
+    phase: P5
+    colour: green
+    author: Marketing & Website
+
+  # ---- Additional Notes (detached band with no connectors into the flow) ----
+  - id: AN01
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; systemic observation about GM merchandising, not tied to one step.
+    type: info
+    text: How GM products are merchandised
+    colour: yellow
+    author: Workshop
+  - id: AN02
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; systemic root-cause note.
+    type: pain
+    text: Two systems so two truths
+    colour: yellow
+    author: Workshop
+  - id: AN03
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; names the two systems behind AN02.
+    type: info
+    text: DSS & PLM
+    colour: yellow
+    author: Workshop
+  - id: AN04
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; tooling pain not tied to one step.
+    type: pain
+    text: Pipeline report. Complicated. Hard to access. Slow
+    colour: yellow
+    author: Workshop
+  - id: AN05
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; legacy-tech pain not tied to one step.
+    type: pain
+    text: All systems are MS DOS from the 90's.
+    colour: yellow
+    author: Workshop
+  - id: AN06
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; contrast note on apparel vs GM merchandising.
+    type: info
+    text: Apparel - grouped as families with relationships. So you can go online and see all the variations on one page
+    colour: yellow
+    author: Workshop
+  - id: AN07
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; contrast note on GM merchandising.
+    type: info
+    text: But GM, like a bed sheet, no family style page, so there will be a PDP for each
+    colour: yellow
+    author: Workshop
+  - id: AN08
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; open question about PIM change scope.
+    type: question
+    text: Changing PIM may not change that, as it is an underlying issue with the way GM products are merchandised?
+    colour: green
+    author: Workshop
+  - id: AN09
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; preference note comparing the two systems.
+    type: opportunity
+    text: DSS preferred - streamlined and user friendly. Compared to PLM
+    colour: yellow
+    author: Workshop
+  - id: AN10
+    step: null
+    unanchored_reason: Detached "Additional Notes" band; individual tooling pain.
+    type: pain
+    text: Neil has to log into a virtual computer to access pipeline report because he is on a Mac
+    colour: yellow
+    author: Workshop

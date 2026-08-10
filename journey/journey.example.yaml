@@ -1,0 +1,172 @@
+# Illustrative example only — the content below is synthetic.
+#
+# Copy this to journey/journey.yaml and replace it with the real board. The board
+# in docs/journey-simplification-method.md has 5 phases and 6 lanes, so start by
+# setting `phases` and `lanes` to match it, then extract objects into
+# `annotations` verbatim (Move 1) before touching anything else.
+
+title: Pre-order purchase
+source: https://miro.com/app/board/REPLACE-ME/
+primary_actor: Online customer buying a pre-order product
+
+# Recorded from the ORIGINAL board, before simplifying. These are the numbers the
+# completeness checks assert against, so count them once and do not adjust them
+# later to make the build pass — adjust the data instead.
+#
+#   objects    = every card + sticky note on the board
+#   connectors = every arrow / line on the board
+expected_counts:
+  objects: 13
+  connectors: 7
+
+phases:
+  - id: P1
+    name: Discover
+  - id: P2
+    name: Commit
+  - id: P3
+    name: Wait
+  - id: P4
+    name: Receive
+
+# Lanes are kept as metadata so the original swimlane view stays recoverable by
+# filtering, even though the simplified board no longer draws them (Move 3).
+lanes:
+  - id: L1
+    name: Customer
+    front_stage: true
+  - id: L2
+    name: Digital Ops
+  - id: L3
+    name: Product data / PIM
+  - id: L4
+    name: Fulfilment
+
+# The spine: one primary actor, one happy path, 5-9 steps (Move 2).
+steps:
+  - id: S1
+    phase: P1
+    name: Sees pre-order product online
+    actors: [Customer]
+    systems: [Storefront PDP]
+    lanes: [L1]
+
+  - id: S2
+    phase: P2
+    name: Places pre-order and pays
+    actors: [Customer]
+    systems: [Cart, Payments]
+    lanes: [L1, L4]
+
+  - id: S3
+    phase: P3
+    name: Allocation is held until release date
+    actors: [Digital Ops]
+    systems: [PIM, OMFP]
+    lanes: [L2, L3]
+
+  - id: S4
+    phase: P4
+    name: Order ships on release date
+    actors: [Customer, Fulfilment]
+    systems: [OMFP]
+    lanes: [L1, L4]
+
+  - id: S5
+    phase: P4
+    name: Receives order and confirms delivery
+    actors: [Customer]
+    systems: [Order tracking]
+    lanes: [L1]
+
+# Long-distance connectors from the original board become short named branches
+# hanging off the step they leave from (Move 5).
+branches:
+  - id: B1
+    name: Allocation sells out before release
+    from_step: S3
+    rejoins: S4
+    steps:
+      - id: B1.1
+        name: Product is taken offline and remaining orders are honoured
+        actors: [Digital Ops]
+        systems: [PIM]
+        lanes: [L2]
+
+# Dependencies that must stay as explicit links rather than becoming branches.
+cross_links:
+  - from: S3
+    to: S1
+    label: sold-out state hides the PDP
+
+# Every object from the original board, typed and attached to a step (Move 4).
+# `text` is verbatim from the sticky; `summary` is optional shorthand. Valid
+# types: pain, risk, assumption, question, opportunity, decision, system, info.
+annotations:
+  - id: N001
+    step: S1
+    type: pain
+    text: Customer cannot tell a pre-order apart from normal stock until checkout
+    summary: Pre-order badge unclear on PDP
+    lane: L1
+    phase: P1
+    colour: pink
+    author: Design
+
+  - id: N002
+    step: S3
+    type: pain
+    text: Ops manually monitors allocation and flips the sold-out switch in PIM
+    lane: L2
+    phase: P3
+    colour: pink
+    author: Digital Ops
+
+  - id: N003
+    step: S3
+    type: opportunity
+    text: Automate take-offline once allocation is exhausted
+    lane: L3
+    phase: P3
+    colour: green
+    author: PDC
+
+  - id: N004
+    step: S3
+    type: decision
+    text: Milestones 3 and 4 ship together as one deployment
+    lane: L3
+    phase: P3
+    colour: yellow
+    author: PDC
+
+  - id: N005
+    step: S4
+    type: risk
+    text: Release-date slippage leaves customers holding paid orders with no ETA
+    lane: L4
+    phase: P4
+    colour: pink
+    author: Ops
+
+  - id: N006
+    step: S2
+    type: question
+    text: Can a pre-order and an in-stock item share one basket?
+    lane: L1
+    phase: P2
+    colour: yellow
+    author: BA
+
+  # An object from the detached bottom band of the original board that has no
+  # place in the flow. Recording it with an explicit reason is what stops it from
+  # being silently dropped.
+  - id: N007
+    step: null
+    unanchored_reason: >
+      Parked in the board's bottom band with no connectors; concerns programme
+      sequencing rather than any single journey step.
+    type: assumption
+    text: Pre-order volume grows from roughly 30 to 300 per year
+    colour: yellow
+    author: Product

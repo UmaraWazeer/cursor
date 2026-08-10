@@ -1,0 +1,5 @@
+# Generated journey artefacts — rebuild with journey/build_journey.py
+journey/out/
+
+__pycache__/
+*.pyc
